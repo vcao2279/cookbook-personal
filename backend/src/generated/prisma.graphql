@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/vu-cao/cookbook/dev
-# timestamp: Sun Nov 11 2018 16:34:23 GMT-0800 (Pacific Standard Time)
+# timestamp: Mon Nov 12 2018 14:25:54 GMT-0800 (Pacific Standard Time)
 
 type AggregateRecipe {
   count: Int!
@@ -80,8 +80,9 @@ type Query {
 type Recipe implements Node {
   id: ID!
   title: String!
+  image: String!
   readyInMinutes: Int!
-  createBy: User!
+  servings: Int!
 }
 
 """A connection to a list of items."""
@@ -96,18 +97,9 @@ type RecipeConnection {
 
 input RecipeCreateInput {
   title: String!
+  image: String!
   readyInMinutes: Int!
-  createBy: UserCreateOneWithoutRecipesInput!
-}
-
-input RecipeCreateManyWithoutCreateByInput {
-  create: [RecipeCreateWithoutCreateByInput!]
-  connect: [RecipeWhereUniqueInput!]
-}
-
-input RecipeCreateWithoutCreateByInput {
-  title: String!
-  readyInMinutes: Int!
+  servings: Int!
 }
 
 """An edge in a connection."""
@@ -124,8 +116,12 @@ enum RecipeOrderByInput {
   id_DESC
   title_ASC
   title_DESC
+  image_ASC
+  image_DESC
   readyInMinutes_ASC
   readyInMinutes_DESC
+  servings_ASC
+  servings_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -135,120 +131,9 @@ enum RecipeOrderByInput {
 type RecipePreviousValues {
   id: ID!
   title: String!
+  image: String!
   readyInMinutes: Int!
-}
-
-input RecipeScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [RecipeScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [RecipeScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [RecipeScalarWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  title: String
-
-  """All values that are not equal to given value."""
-  title_not: String
-
-  """All values that are contained in given list."""
-  title_in: [String!]
-
-  """All values that are not contained in given list."""
-  title_not_in: [String!]
-
-  """All values less than the given value."""
-  title_lt: String
-
-  """All values less than or equal the given value."""
-  title_lte: String
-
-  """All values greater than the given value."""
-  title_gt: String
-
-  """All values greater than or equal the given value."""
-  title_gte: String
-
-  """All values containing the given string."""
-  title_contains: String
-
-  """All values not containing the given string."""
-  title_not_contains: String
-
-  """All values starting with the given string."""
-  title_starts_with: String
-
-  """All values not starting with the given string."""
-  title_not_starts_with: String
-
-  """All values ending with the given string."""
-  title_ends_with: String
-
-  """All values not ending with the given string."""
-  title_not_ends_with: String
-  readyInMinutes: Int
-
-  """All values that are not equal to given value."""
-  readyInMinutes_not: Int
-
-  """All values that are contained in given list."""
-  readyInMinutes_in: [Int!]
-
-  """All values that are not contained in given list."""
-  readyInMinutes_not_in: [Int!]
-
-  """All values less than the given value."""
-  readyInMinutes_lt: Int
-
-  """All values less than or equal the given value."""
-  readyInMinutes_lte: Int
-
-  """All values greater than the given value."""
-  readyInMinutes_gt: Int
-
-  """All values greater than or equal the given value."""
-  readyInMinutes_gte: Int
+  servings: Int!
 }
 
 type RecipeSubscriptionPayload {
@@ -292,50 +177,16 @@ input RecipeSubscriptionWhereInput {
 
 input RecipeUpdateInput {
   title: String
+  image: String
   readyInMinutes: Int
-  createBy: UserUpdateOneRequiredWithoutRecipesInput
-}
-
-input RecipeUpdateManyDataInput {
-  title: String
-  readyInMinutes: Int
+  servings: Int
 }
 
 input RecipeUpdateManyMutationInput {
   title: String
+  image: String
   readyInMinutes: Int
-}
-
-input RecipeUpdateManyWithoutCreateByInput {
-  create: [RecipeCreateWithoutCreateByInput!]
-  connect: [RecipeWhereUniqueInput!]
-  disconnect: [RecipeWhereUniqueInput!]
-  delete: [RecipeWhereUniqueInput!]
-  update: [RecipeUpdateWithWhereUniqueWithoutCreateByInput!]
-  updateMany: [RecipeUpdateManyWithWhereNestedInput!]
-  deleteMany: [RecipeScalarWhereInput!]
-  upsert: [RecipeUpsertWithWhereUniqueWithoutCreateByInput!]
-}
-
-input RecipeUpdateManyWithWhereNestedInput {
-  where: RecipeScalarWhereInput!
-  data: RecipeUpdateManyDataInput!
-}
-
-input RecipeUpdateWithoutCreateByDataInput {
-  title: String
-  readyInMinutes: Int
-}
-
-input RecipeUpdateWithWhereUniqueWithoutCreateByInput {
-  where: RecipeWhereUniqueInput!
-  data: RecipeUpdateWithoutCreateByDataInput!
-}
-
-input RecipeUpsertWithWhereUniqueWithoutCreateByInput {
-  where: RecipeWhereUniqueInput!
-  update: RecipeUpdateWithoutCreateByDataInput!
-  create: RecipeCreateWithoutCreateByInput!
+  servings: Int
 }
 
 input RecipeWhereInput {
@@ -427,6 +278,46 @@ input RecipeWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
+  image: String
+
+  """All values that are not equal to given value."""
+  image_not: String
+
+  """All values that are contained in given list."""
+  image_in: [String!]
+
+  """All values that are not contained in given list."""
+  image_not_in: [String!]
+
+  """All values less than the given value."""
+  image_lt: String
+
+  """All values less than or equal the given value."""
+  image_lte: String
+
+  """All values greater than the given value."""
+  image_gt: String
+
+  """All values greater than or equal the given value."""
+  image_gte: String
+
+  """All values containing the given string."""
+  image_contains: String
+
+  """All values not containing the given string."""
+  image_not_contains: String
+
+  """All values starting with the given string."""
+  image_starts_with: String
+
+  """All values not starting with the given string."""
+  image_not_starts_with: String
+
+  """All values ending with the given string."""
+  image_ends_with: String
+
+  """All values not ending with the given string."""
+  image_not_ends_with: String
   readyInMinutes: Int
 
   """All values that are not equal to given value."""
@@ -449,7 +340,28 @@ input RecipeWhereInput {
 
   """All values greater than or equal the given value."""
   readyInMinutes_gte: Int
-  createBy: UserWhereInput
+  servings: Int
+
+  """All values that are not equal to given value."""
+  servings_not: Int
+
+  """All values that are contained in given list."""
+  servings_in: [Int!]
+
+  """All values that are not contained in given list."""
+  servings_not_in: [Int!]
+
+  """All values less than the given value."""
+  servings_lt: Int
+
+  """All values less than or equal the given value."""
+  servings_lte: Int
+
+  """All values greater than the given value."""
+  servings_gt: Int
+
+  """All values greater than or equal the given value."""
+  servings_gte: Int
 }
 
 input RecipeWhereUniqueInput {
@@ -466,7 +378,6 @@ type User implements Node {
   name: String!
   email: String!
   password: String!
-  recipes(where: RecipeWhereInput, orderBy: RecipeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Recipe!]
 }
 
 """A connection to a list of items."""
@@ -480,18 +391,6 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  name: String!
-  email: String!
-  password: String!
-  recipes: RecipeCreateManyWithoutCreateByInput
-}
-
-input UserCreateOneWithoutRecipesInput {
-  create: UserCreateWithoutRecipesInput
-  connect: UserWhereUniqueInput
-}
-
-input UserCreateWithoutRecipesInput {
   name: String!
   email: String!
   password: String!
@@ -571,31 +470,12 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
-  recipes: RecipeUpdateManyWithoutCreateByInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
-}
-
-input UserUpdateOneRequiredWithoutRecipesInput {
-  create: UserCreateWithoutRecipesInput
-  connect: UserWhereUniqueInput
-  update: UserUpdateWithoutRecipesDataInput
-  upsert: UserUpsertWithoutRecipesInput
-}
-
-input UserUpdateWithoutRecipesDataInput {
-  name: String
-  email: String
-  password: String
-}
-
-input UserUpsertWithoutRecipesInput {
-  update: UserUpdateWithoutRecipesDataInput!
-  create: UserCreateWithoutRecipesInput!
 }
 
 input UserWhereInput {
@@ -767,9 +647,6 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
-  recipes_every: RecipeWhereInput
-  recipes_some: RecipeWhereInput
-  recipes_none: RecipeWhereInput
 }
 
 input UserWhereUniqueInput {

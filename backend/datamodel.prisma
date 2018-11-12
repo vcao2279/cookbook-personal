@@ -3,12 +3,16 @@ type User {
   name: String!
   email: String!
   password: String!
-  recipes: [Recipe!]!
+  # recipes: [Recipe!]!
 }
 
 type Recipe {
   id: ID! @unique
   title: String!
+  image: String!
   readyInMinutes: Int!
-  createBy: User!
+  servings: Int!
+  # createBy: User!
+  # ingredients
+  # instructions
 }

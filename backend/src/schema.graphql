@@ -1,14 +1,20 @@
-const { forwardTo } = require('prisma-binding');
-
-type Query {
-  hi: String!
+# import * from './generated/prisma.graphql'
+type Mutation {
+  createRecipe(
+    title: String
+    image: String
+    readyInMinutes: Int
+    servings: Int
+  ): Recipe!
 }
 
-type Mutation {
-  hi: String!
+type Query {
+  recipes: [Recipe]!
 }
 
 type User {
   id: ID!
   name: String!
+  email: String!
+  # recipes: [Recipe!]!
 }
