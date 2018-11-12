@@ -10,6 +10,7 @@ const Navbar = styled.ul`
   justify-content: space-between;
   border: 1px solid black;
   grid-area: sidebar;
+  height: 100vh;
 `;
 
 const Li = styled.li`
