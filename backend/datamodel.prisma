@@ -1,0 +1,14 @@
+type User {
+  id: ID! @unique
+  name: String!
+  email: String!
+  password: String!
+  recipes: [Recipe!]!
+}
+
+type Recipe {
+  id: ID! @unique
+  title: String!
+  readyInMinutes: Int!
+  createBy: User!
+}

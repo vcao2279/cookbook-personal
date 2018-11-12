@@ -1,0 +1,14 @@
+const { forwardTo } = require('prisma-binding');
+
+type Query {
+  hi: String!
+}
+
+type Mutation {
+  hi: String!
+}
+
+type User {
+  id: ID!
+  name: String!
+}
