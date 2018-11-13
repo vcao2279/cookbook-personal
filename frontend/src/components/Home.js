@@ -14,7 +14,7 @@ const Content = styled.div`
   grid-template-areas:
     "header header header header"
     "pathname pathname pathname pathname"
-    "sidebar main main main"
+    "navbar main main sidebar"
     "footer footer footer footer";
   grid-template-rows: auto;
   grid-template-columns: 1fr 2fr 2fr 2fr;
@@ -33,7 +33,6 @@ const Main = styled.div`
 
 const Path = styled.div`
   padding: 20px;
-  border: 1px solid blue;
 `;
 
 class Home extends Component {

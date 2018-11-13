@@ -7,10 +7,10 @@ const Navbar = styled.ul`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   border: 1px solid black;
-  grid-area: sidebar;
-  height: 100vh;
+  grid-area: navbar;
+  height: 80vh;
 `;
 
 const Li = styled.li`

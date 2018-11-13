@@ -1,33 +1,110 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
-const Preview = props => {
-  const recipe = {
-    title: "BASIC FRENCH OMELET RECIPE",
-    img:
-      "https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/basic-french-omelet-930x550.jpg",
-    readyInMinutes: 7,
-    servings: 1,
-    ingredients: ["eggs", "water", "salt", "pepper", "butter", "chopped ham"],
-    instructions:
-      "BEAT eggs, water, salt and pepper in small bowl until blended. HEAT butter in 6 to 8-inch nonstick omelet pan or skillet over medium-high heat until hot. TILT pan to coat bottom. POUR IN egg mixture. Mixture should set immediately at edges. GENTLY PUSH cooked portions from edges toward the center with inverted turner so that uncooked eggs can reach the hot pan surface. CONTINUE cooking, tilting pan and gently moving cooked portions as needed. When top surface of eggs is thickened and no visible liquid egg remains, PLACE filling on one side of the omelet. FOLD omelet in half with turner. With a quick flip of the wrist, turn pan and INVERT or SLIDE omelet onto plate. SERVE immediately."
+const Section = styled.section`
+  grid-area: main;
+`;
+
+class Preview extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.id,
+      loading: this.props.loading,
+      title: "",
+      readyInMinutes: null,
+      servings: null,
+      ingredients: [],
+      instructions: "",
+      image: ""
+    };
+  }
+
+  componentDidMount() {
+    if (this.state.id) {
+      this.getRecipe(Number(this.state.id));
+    }
+  }
+
+  getRecipe = async id => {
+    const url = `${process.env.REACT_APP_API_HOST}${id}/information`;
+    try {
+      const { data } = await axios.get(url, {
+        headers: {
+          "X-Mashape-Key": `${process.env.REACT_APP_API_KEY}`
+        }
+      });
+
+      const {
+        title,
+        readyInMinutes,
+        servings,
+        image,
+        instructions,
+        extendedIngredients
+      } = data;
+
+      const ingredients = extendedIngredients.map(i => i.name);
+
+      this.setState({
+        title,
+        readyInMinutes,
+        servings,
+        image,
+        instructions,
+        ingredients,
+        loading: false
+      });
+    } catch (error) {
+      console.log(error.data);
+    }
   };
 
-  return (
-    <section>
-      <header>{recipe.title}</header>
-      <img
-        src={recipe.img}
-        alt={recipe.title}
-        style={{ height: "160px", width: "270" }}
-      />
-      <div>
-        Prep Time: {recipe.readyInMinutes}, Servings: {recipe.servings}
-      </div>
-      <div>Ingredients: {recipe.ingredients.join(", ")}</div>
-      <div>Instruction: {recipe.instructions}</div>
-    </section>
-  );
-};
+  render() {
+    const preview = this.state.loading ? (
+      <div>Loading...</div>
+    ) : (
+      <React.Fragment>
+        <header>{this.state.title}</header>
+        <img
+          src={this.state.image}
+          alt={this.state.title}
+          style={{ height: "160px", width: "270" }}
+        />
+        <div>
+          Prep Time: {this.state.readyInMinutes}, Servings:{" "}
+          {this.state.servings}
+        </div>
+        <div>Ingredients: {this.state.ingredients.join(", ")}</div>
+        <div>Instruction: {this.state.instructions}</div>
+      </React.Fragment>
+    );
+
+    // if (this.props.id) {
+    //   const {
+    //     title,
+    //     readyInMinutes,
+    //     servings,
+    //     image,
+    //     instructions,
+    //     ingredients
+    //   } = this.getRecipe(this.props.id);
+    //   console.log(
+    //     title,
+    //     readyInMinutes,
+    //     servings,
+    //     image,
+    //     instructions,
+    //     ingredients
+    //   );
+    // }
+    // preview = (
+    // );
+    // return { preview };
+    console.log(this.state);
+    return <Section>{preview}</Section>;
+  }
+}
 
 export default Preview;
