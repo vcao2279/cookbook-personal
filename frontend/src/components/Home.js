@@ -10,14 +10,16 @@ import Settings from "./Settings";
 import Billing from "./Billing";
 
 const Content = styled.div`
+  max-width: 70%;
+  margin: auto;
   display: grid;
   grid-template-areas:
-    "header header header header"
-    "pathname pathname pathname pathname"
-    "navbar main main sidebar"
-    "footer footer footer footer";
+    "header header"
+    "pathname pathname"
+    "navbar main"
+    "footer footer";
   grid-template-rows: auto;
-  grid-template-columns: 1fr 2fr 2fr 2fr;
+  grid-template-columns: 1fr 6fr;
 `;
 
 const Header = styled.div`

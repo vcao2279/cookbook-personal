@@ -1,7 +1,14 @@
 import React from "react";
+import TakeMyMoney from "./Subscribe";
 
 const Billing = () => {
-  return <div>This is Billing page</div>;
+  return (
+    <div>
+      <TakeMyMoney>
+        <button>Subscribe</button>
+      </TakeMyMoney>
+    </div>
+  );
 };
 
 export default Billing;
