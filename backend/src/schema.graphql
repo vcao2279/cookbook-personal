@@ -9,7 +9,8 @@ type Mutation {
 }
 
 type Query {
-  recipes: [Recipe]!
+  recipes: [Recipe!]!
+  recipe(id: ID!): Recipe!
 }
 
 type User {

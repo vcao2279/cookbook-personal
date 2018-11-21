@@ -26,6 +26,9 @@ const Header = styled.div`
   padding: 20px;
   border: 1px solid red;
   grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Main = styled.div`
@@ -38,6 +41,22 @@ const Path = styled.div`
 `;
 
 class Home extends Component {
+  async componentDidMount() {
+    if (this.props.location.pathname === "/callback") return;
+    try {
+      await this.props.auth.silentAuth();
+      this.forceUpdate();
+    } catch (err) {
+      if (err.error === "login_required") return;
+      console.log(err.error);
+    }
+  }
+
+  logout = () => {
+    this.props.auth.logout();
+    this.props.history.replace("/");
+  };
+
   render() {
     let current = this.props.location.pathname.split("/").pop();
     current =
@@ -48,6 +67,7 @@ class Home extends Component {
           <Link to="/home">
             <div>Home</div>
           </Link>
+          <button onClick={this.logout}>Logout</button>
         </Header>
         <Path>
           <Link to="/home">Home</Link> / {current}

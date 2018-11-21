@@ -3,7 +3,9 @@ type User {
   name: String!
   email: String!
   password: String!
-  # recipes: [Recipe!]!
+  recipes: [Recipe!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Recipe {
@@ -12,7 +14,9 @@ type Recipe {
   image: String!
   readyInMinutes: Int!
   servings: Int!
-  # createBy: User!
+  createBy: User!
   # ingredients
   # instructions
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
