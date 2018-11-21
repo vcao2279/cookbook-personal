@@ -5,7 +5,12 @@ const Query = {
   //     const items = ctx.db.query.recipes();
   //     return items;
   //   }
-  recipes: forwardTo("db")
+  recipes: async (parent, args, ctx, info) => {
+    console.log(`ctx.request.email: ${ctx.request.email}`);
+    console.log(`ctx.request.auth0sub: ${ctx.request.auth0sub}`);
+    const recipes = await ctx.db.query.recipes({}, info);
+    return recipes;
+  }
 };
 
 module.exports = Query;

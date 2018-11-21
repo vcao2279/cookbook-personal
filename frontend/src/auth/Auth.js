@@ -37,7 +37,6 @@ class Auth {
   setSession = authResult => {
     // Set the time that the Access Token will expire at
     this.idToken = authResult.idToken;
-    console.log(this.idToken);
     // set the time that the id token will expire at
     this.expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
     localStorage.setItem(this.authFlag, JSON.stringify(true));

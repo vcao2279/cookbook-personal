@@ -41,16 +41,16 @@ const Path = styled.div`
 `;
 
 class Home extends Component {
-  async componentDidMount() {
-    if (this.props.location.pathname === "/callback") return;
-    try {
-      await this.props.auth.silentAuth();
-      this.forceUpdate();
-    } catch (err) {
-      if (err.error === "login_required") return;
-      console.log(err.error);
-    }
-  }
+  // async componentDidMount() {
+  //   if (this.props.location.pathname === "/callback") return;
+  //   try {
+  //     await this.props.auth.silentAuth();
+  //     this.forceUpdate();
+  //   } catch (err) {
+  //     if (err.error === "login_required") return;
+  //     console.log(err.error);
+  //   }
+  // }
 
   logout = () => {
     this.props.auth.logout();
