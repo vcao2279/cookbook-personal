@@ -1,21 +1,16 @@
 # import * from './generated/prisma.graphql'
 type Mutation {
   createRecipe(
-    title: String
-    image: String
-    readyInMinutes: Int
-    servings: Int
+    title: String!
+    image: String!
+    readyInMinutes: Int!
+    servings: Int!
   ): Recipe!
+  createUser(name: String!): User!
 }
 
 type Query {
   recipes: [Recipe!]!
   recipe(id: ID!): Recipe!
-}
-
-type User {
-  id: ID!
-  name: String!
-  email: String!
-  # recipes: [Recipe!]!
+  currentUser(auth0sub: String): User
 }

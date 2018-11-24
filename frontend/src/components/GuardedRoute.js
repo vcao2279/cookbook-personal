@@ -1,14 +1,15 @@
 import React from "react";
-import { Route } from "react-router-dom";
-import auth from "../auth/Auth";
+import { Route, Redirect } from "react-router-dom";
 
 function GuardedRoute(props) {
+  const auth = props.auth;
+  const isAuthenticated = auth.isAuthenticated();
   const { component: Component, path } = props;
   return (
     <Route
       path={path}
       render={props => {
-        if (!auth.isAuthenticated()) return auth.login();
+        if (!isAuthenticated) return <Redirect to="/" />;
         return <Component auth={auth} {...props} />;
       }}
     />

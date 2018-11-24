@@ -1,8 +1,8 @@
 type User {
   id: ID! @unique
+  auth0sub: String! @unique
   name: String!
   email: String!
-  password: String!
   recipes: [Recipe!]!
   createdAt: DateTime!
   updatedAt: DateTime!

@@ -279,7 +279,7 @@ type User {
   id: ID!
   name: String!
   email: String!
-  password: String!
+  auth0sub: String!
   recipes(where: RecipeWhereInput, orderBy: RecipeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Recipe!]
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -294,7 +294,7 @@ type UserConnection {
 input UserCreateInput {
   name: String!
   email: String!
-  password: String!
+  auth0sub: String!
   recipes: RecipeCreateManyWithoutCreateByInput
 }
 
@@ -306,7 +306,7 @@ input UserCreateOneWithoutRecipesInput {
 input UserCreateWithoutRecipesInput {
   name: String!
   email: String!
-  password: String!
+  auth0sub: String!
 }
 
 type UserEdge {
@@ -321,8 +321,8 @@ enum UserOrderByInput {
   name_DESC
   email_ASC
   email_DESC
-  password_ASC
-  password_DESC
+  auth0sub_ASC
+  auth0sub_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -333,7 +333,7 @@ type UserPreviousValues {
   id: ID!
   name: String!
   email: String!
-  password: String!
+  auth0sub: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -359,14 +359,14 @@ input UserSubscriptionWhereInput {
 input UserUpdateInput {
   name: String
   email: String
-  password: String
+  auth0sub: String
   recipes: RecipeUpdateManyWithoutCreateByInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
-  password: String
+  auth0sub: String
 }
 
 input UserUpdateOneRequiredWithoutRecipesInput {
@@ -379,7 +379,7 @@ input UserUpdateOneRequiredWithoutRecipesInput {
 input UserUpdateWithoutRecipesDataInput {
   name: String
   email: String
-  password: String
+  auth0sub: String
 }
 
 input UserUpsertWithoutRecipesInput {
@@ -430,20 +430,20 @@ input UserWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
-  password: String
-  password_not: String
-  password_in: [String!]
-  password_not_in: [String!]
-  password_lt: String
-  password_lte: String
-  password_gt: String
-  password_gte: String
-  password_contains: String
-  password_not_contains: String
-  password_starts_with: String
-  password_not_starts_with: String
-  password_ends_with: String
-  password_not_ends_with: String
+  auth0sub: String
+  auth0sub_not: String
+  auth0sub_in: [String!]
+  auth0sub_not_in: [String!]
+  auth0sub_lt: String
+  auth0sub_lte: String
+  auth0sub_gt: String
+  auth0sub_gte: String
+  auth0sub_contains: String
+  auth0sub_not_contains: String
+  auth0sub_starts_with: String
+  auth0sub_not_starts_with: String
+  auth0sub_ends_with: String
+  auth0sub_not_ends_with: String
   recipes_every: RecipeWhereInput
   recipes_some: RecipeWhereInput
   recipes_none: RecipeWhereInput
@@ -470,4 +470,5 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  auth0sub: String
 }

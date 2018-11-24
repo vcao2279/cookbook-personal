@@ -8,6 +8,7 @@ import Calendar from "./Calendar";
 import Dashboard from "./Dashboard";
 import Settings from "./Settings";
 import Billing from "./Billing";
+import User from "./User";
 
 const Content = styled.div`
   max-width: 70%;
@@ -41,17 +42,6 @@ const Path = styled.div`
 `;
 
 class Home extends Component {
-  // async componentDidMount() {
-  //   if (this.props.location.pathname === "/callback") return;
-  //   try {
-  //     await this.props.auth.silentAuth();
-  //     this.forceUpdate();
-  //   } catch (err) {
-  //     if (err.error === "login_required") return;
-  //     console.log(err.error);
-  //   }
-  // }
-
   logout = () => {
     this.props.auth.logout();
     this.props.history.replace("/");
@@ -67,6 +57,12 @@ class Home extends Component {
           <Link to="/home">
             <div>Home</div>
           </Link>
+          <User>
+            {({ data: { currentUser } }) => {
+              if (currentUser) return <p>{currentUser.name}</p>;
+              return null;
+            }}
+          </User>
           <button onClick={this.logout}>Logout</button>
         </Header>
         <Path>
