@@ -6,6 +6,7 @@ const Query = {
     return recipes;
   },
   currentUser: async (parent, args, ctx, info) => {
+    console.log("args: ", args);
     const auth0sub = args.auth0sub || ctx.request.auth0sub || "";
     const user = await ctx.db.query.user(
       {

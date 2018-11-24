@@ -10,10 +10,12 @@ class Callback extends Component {
       isAuthenticated: false
     };
   }
+
   async componentDidMount() {
     try {
       const authResult = await this.props.auth.handleAuthentication();
       if (authResult) {
+        console.log("CB authResult: ", authResult);
         this.setState({ isAuthenticated: true });
       }
     } catch (error) {

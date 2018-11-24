@@ -57,7 +57,7 @@ class Home extends Component {
           <Link to="/home">
             <div>Home</div>
           </Link>
-          <User>
+          <User variables={{ auth0sub: this.props.payload.sub }}>
             {({ data: { currentUser } }) => {
               if (currentUser) return <p>{currentUser.name}</p>;
               return null;

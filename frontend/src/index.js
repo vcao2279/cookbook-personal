@@ -18,6 +18,7 @@ const httpLink = createHttpLink({
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = auth.getIdToken();
+  console.log("client token: ", token);
   // return the headers to the context so httpLink can read them
   return {
     headers: {

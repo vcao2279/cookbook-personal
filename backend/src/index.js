@@ -24,6 +24,7 @@ const options = {
 
 server.express.use(async (req, res, next) => {
   const token = req.headers.authorization;
+  console.log("server token: ", token);
   // var decoded = jwt.decode(token, { complete: true });
   if (token) {
     try {

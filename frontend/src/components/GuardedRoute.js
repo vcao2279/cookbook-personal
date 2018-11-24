@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 
 function GuardedRoute(props) {
   const auth = props.auth;
+  const payload = props.payload;
   const isAuthenticated = auth.isAuthenticated();
   const { component: Component, path } = props;
   return (
@@ -10,7 +11,7 @@ function GuardedRoute(props) {
       path={path}
       render={props => {
         if (!isAuthenticated) return <Redirect to="/" />;
-        return <Component auth={auth} {...props} />;
+        return <Component {...props} payload={payload} auth={auth} />;
       }}
     />
   );

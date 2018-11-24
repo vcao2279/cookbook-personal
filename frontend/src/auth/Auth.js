@@ -61,7 +61,7 @@ class Auth {
             return reject(err);
           }
           this.setSession(authResult);
-          resolve();
+          resolve(authResult);
         });
       });
     }
@@ -69,7 +69,8 @@ class Auth {
 
   isAuthenticated = () => {
     // Check whether the current time is past the token's expiry time
-    return new Date().getTime() < this.expiresAt;
+    // return new Date().getTime() < this.expiresAt;
+    return JSON.parse(localStorage.getItem(this.authFlag));
   };
 }
 
